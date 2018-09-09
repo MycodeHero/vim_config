@@ -1,0 +1,66 @@
+:set number
+:set tabstop=2
+set shiftwidth=2 "表示每一级缩进的长度
+set softtabstop=2 
+
+set nocompatible               
+filetype off                  
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Bundle 'scrooloose/nerdtree' 
+Bundle 'pangloss/vim-javascript'
+Plugin 'posva/vim-vue'
+Plugin 'kien/ctrlp.vim'
+Plugin 'morhetz/gruvbox'
+
+call vundle#end()            
+filetype plugin indent on    
+
+" basic gravbox configuration
+
+set bg=dark                     " 设置背景为黑色
+colorscheme gruvbox             " 设置主题为 gruvbox
+set guioptions=                 " 去掉两边的scrollbar
+set guifont=Monaco:h17          " 设置字体和字的大小
+
+
+" basic vim-javascript configuration
+
+let g:javascript_plugin_jsdoc=1    " JSDocs 语法高亮.
+syntax enable " 启用 语法高亮 
+syntax on " 语法高亮 
+filetype on " 检测文件类型 
+
+" basic vim-javascript configuration
+
+"---------- Split Mapping ----------
+" 切屏重定向
+nmap <c-j> <c-w>j
+nmap <c-k> <c-w>k
+nmap <c-h> <c-w>h
+nmap <c-l> <c-w>l
+
+" basic nerdtree configuration
+
+"当 vim 启动没指定文件时，自动打开 NERDTree
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+"在 normal 下按 ,d 打开关闭文件浏览
+
+nmap ,d :NERDTreeToggle<CR>
+
+" basic ctrlp configuration
+
+"---------- search ignore  ----------
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+												\   'dir':  '[\v[\/]\.(git|hg|svn)|node_modules]$',
+												\'file': '\v\.(exe|so|dll)$',
+												\}
